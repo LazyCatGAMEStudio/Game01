@@ -11,8 +11,7 @@ BLUE = pygame.Color(0, 0, 255)
 
 # system constant
 FPS_LIMIT = 60
-SCREEN_SIZE = (300,300)
+SCREEN_WIDTH = 400
+SCREEN_HEIGHT = 600
+SCREEN_SIZE = (SCREEN_WIDTH, SCREEN_HEIGHT)
 MAIN_PATH = "/Users/lwk/Documents/MyGame/Game01"
-
-
-
