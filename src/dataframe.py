@@ -1,0 +1,5 @@
+import const
+
+DATA ={
+    "player"
+}
