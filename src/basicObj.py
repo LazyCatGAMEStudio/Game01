@@ -15,7 +15,7 @@ class Basic(imageObj.Image):
         self.speed_down = dataFile.get("speed_down", 0.0)
         self.speed_lt = dataFile.get("speed_lt")
         self.speed_rt = dataFile.get("speed_rt")
-
+        
         assert self.speed_rt and self.speed_lt 
 
     def __str__(self) -> str:
@@ -24,7 +24,7 @@ class Basic(imageObj.Image):
     def goFwd(self, mirror=False):
         print("log fwd")
         if not mirror:
-            self.rect.move_ip(0, float(-self.speed_fwd))
+            self.rect.move_ip(0, -self.speed_fwd)
         else:    
             self.rect.move_ip(0, self.speed_fwd)
 
