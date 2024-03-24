@@ -9,6 +9,7 @@ class Enemy(basicObj.Basic):
    def __init__(self) -> None:
       super().__init__("Enemy.png", dataframe.DATA.get("enemy"))
       self.level = 0
+      self.rand_flag = random.randint(0,1)
       self.preframe_time = 0
    
    def levelUp(self):
@@ -30,23 +31,32 @@ class Enemy(basicObj.Basic):
          self.rect.center = (random.randint(30,370), 0)
 
    def moveWithFrame(self,drunk:bool):
-      if time.time() - self.preframe_time <= 2/const.FPS_LIMIT:
-         self.goFwd(mirror=True)
+      if time.time() - self.preframe_time <= 45/const.FPS_LIMIT:
+         if drunk:
+            if self.rand_flag == 1:
+               if self.rect.left > 0:
+                  self.goFwd(mirror=True)
+                  self.goLt()
+               else:
+                  self.rand_flag = 0
+                  self.goFwd(mirror=True)
+            else:
+               if self.rect.right < const.SCREEN_WIDTH:
+                  self.goFwd(mirror=True)
+                  self.goRt()
+               else:
+                  self.rand_flag = 1
+                  self.goFwd(mirror=True)
+         else:
+            self.goFwd(mirror=True)
          self.reset()
          return
       self.preframe_time = time.time()
-      if drunk:
-         if random.randint(0,1) == 1 and self.rect.left > 0:
-            self.goFwd(mirror=True)
-            self.goLt()
-         elif self.rect.right < const.SCREEN_WIDTH:
-            self.goFwd(mirror=True)
-            self.goRt()
-         else:
-            self.goFwd()
-      else:
-         self.goFwd()
+      self.rand_flag = random.randint(0,1)
+      self.goFwd(mirror=True)
       self.reset()
+      return
+
       
 
 
